@@ -16,7 +16,7 @@ public class TestLanguage extends Language {
 			System.out.println("testSub() success!");
 			testMinor();
 			System.out.println("testMinor() success!");
-			////////////////////////////////////////////////////testMaior();
+			// //////////////////////////////////////////////////testMaior();
 			System.out.println("testMaior() success!");
 			testMultiAddSub();
 			System.out.println("testMultiAddSub() success!");
@@ -38,7 +38,7 @@ public class TestLanguage extends Language {
 		integer("b", b);
 		integer("c", c);
 
-		//assign(var("a"), add(var("b"), var("c")));
+		// assign(var("a"), add(var("b"), var("c")));
 		assign("a", add("b", "c"));
 
 		execute();
@@ -46,10 +46,6 @@ public class TestLanguage extends Language {
 		a = b + c;
 
 		if (a != var("a").evaluate()) {
-		//int result = 0;
-		//evaluate(result, "a");
-		//
-		//if (a != result) {
 			throw new Exception("testAdd() failed!");
 		}
 	}
@@ -60,7 +56,7 @@ public class TestLanguage extends Language {
 		integer("b", b);
 		integer("c", c);
 
-		//assign(var("a"), sub(var("b"), var("c")));
+		// assign(var("a"), sub(var("b"), var("c")));
 		assign("a", sub("b", "c"));
 
 		execute();
@@ -68,10 +64,10 @@ public class TestLanguage extends Language {
 		a = b - c;
 
 		if (a != var("a").evaluate()) {
-		//int result = 0;
-		//evaluate(result, "a");
-		//
-		//if (a != result) {
+			// int result = 0;
+			// evaluate(result, "a");
+			//
+			// if (a != result) {
 			throw new Exception("testSub() failed!");
 		}
 	}
@@ -84,20 +80,20 @@ public class TestLanguage extends Language {
 		integer("c", c);
 		integer("d", d);
 
-		//assign("a", minor("b", "c"));
+		// assign("a", minor("b", "c"));
 
 		execute();
 
 		a = c < d;
 		b = d < c;
 
-		//if (a != var("a").evaluate()) {
-		//	throw new Exception("testMinor() failed!");
-		//}
-		
-		//if (b != var("b").evaluate()) {
-		//	throw new Exception("testMinor() failed!");
-		//}
+		// if (a != var("a").evaluate()) {
+		// throw new Exception("testMinor() failed!");
+		// }
+
+		// if (b != var("b").evaluate()) {
+		// throw new Exception("testMinor() failed!");
+		// }
 	}
 
 	private void testMultiAddSub() throws Exception {
@@ -108,7 +104,8 @@ public class TestLanguage extends Language {
 		integer("d", d);
 		integer("e", e);
 
-		//assign(var("a"), sub(add(add(var("b"), var("c")), var("d")), var("e")));
+		// assign(var("a"), sub(add(add(var("b"), var("c")), var("d")),
+		// var("e")));
 		assign("a", sub(add(add("b", "c"), "d"), "e"));
 
 		execute();
@@ -116,10 +113,10 @@ public class TestLanguage extends Language {
 		a = (((b + c) + d) - e);
 
 		if (a != var("a").evaluate()) {
-		//int result = 0;
-		//evaluate(result, "a");
-		//
-		//if (a != result) {
+			// int result = 0;
+			// evaluate(result, "a");
+			//
+			// if (a != result) {
 			throw new Exception("testMultiAdd() failed!");
 		}
 	}
@@ -131,12 +128,12 @@ public class TestLanguage extends Language {
 			integer("b", b);
 			integer("c", c);
 
-			//ifcond(minor(var("b"), var("c")),
+			// ifcond(minor(var("b"), var("c")),
 			ifcond(minor("b", "c"),
-					//getassign(var("a"), sub(var("c"), var("b"))),
-					getassign("a", sub("c", "b")),
-					//getassign(var("a"), sub(var("b"), var("c"))));
-					getassign("a", sub("b", "c")));
+			// getAssignement(var("a"), sub(var("c"), var("b"))),
+					getAssignement("a", sub("c", "b")),
+					// getAssignement(var("a"), sub(var("b"), var("c"))));
+					getAssignement("a", sub("b", "c")));
 
 			execute();
 
@@ -146,10 +143,10 @@ public class TestLanguage extends Language {
 				a = b - c;
 
 			if (a != var("a").evaluate()) {
-			//int result = 0;
-			//evaluate(result, "a");
-			//
-			//if (a != result) {
+				// int result = 0;
+				// evaluate(result, "a");
+				//
+				// if (a != result) {
 				throw new Exception("testIfElse() failed!");
 			}
 		}
@@ -161,12 +158,13 @@ public class TestLanguage extends Language {
 			integer("c", c);
 			integer("k", k);
 
-			//ifcond(minor(var("b"), var("c")),
+			// ifcond(minor(var("b"), var("c")),
 			ifcond(minor("b", "c"),
-					//getassign(var("a"), add(sub(var("c"), var("b")), var("k"))),
-					getassign("a", add(sub("c", "b"), "k")),
-					//getassign(var("a"), sub(sub(var("b"), var("c")), var("k"))));
-					getassign("a", sub(sub("b", "c"), "k")));
+			// getAssignement(var("a"), add(sub(var("c"), var("b")), var("k"))),
+					getAssignement("a", add(sub("c", "b"), "k")),
+					// getAssignement(var("a"), sub(sub(var("b"), var("c")),
+					// var("k"))));
+					getAssignement("a", sub(sub("b", "c"), "k")));
 
 			execute();
 
@@ -176,40 +174,25 @@ public class TestLanguage extends Language {
 				a = b - c - k;
 
 			if (a != var("a").evaluate()) {
-			//int result = 0;
-			//evaluate(result, "a");
-			//
-			//if (a != result) {
+				// int result = 0;
+				// evaluate(result, "a");
+				//
+				// if (a != result) {
 				throw new Exception("testIfElse() failed!");
 			}
 		}
 		/*
 		 * 
-AlgoritmoDeEuclides(a: inteiro; b: inteiro): inteiro
-variáveis
-   divisor: inteiro
-   dividendo: inteiro
-   c: inteiro
-início
-   
-   se b > a então
-   início
-     dividendo = b
-     divisor = a
-   senão
-     dividendo = a
-     divisor = b
-   fim-se
-   
-   enquanto resto(dividendo/divisor) ≠ 0
-   início
-      c = resto(dividendo/divisor)
-      dividendo = divisor
-      divisor = c
-   fim-enquanto
-   
-   AlgoritmoDeEuclides = divisor
-fim-função
+		 * AlgoritmoDeEuclides(a: inteiro; b: inteiro): inteiro variáveis
+		 * divisor: inteiro dividendo: inteiro c: inteiro início
+		 * 
+		 * se b > a então início dividendo = b divisor = a senão dividendo = a
+		 * divisor = b fim-se
+		 * 
+		 * enquanto resto(dividendo/divisor) ≠ 0 início c =
+		 * resto(dividendo/divisor) dividendo = divisor divisor = c fim-enquanto
+		 * 
+		 * AlgoritmoDeEuclides = divisor fim-função
 		 * 
 		 * menor(soma(variavel("a"), constante(3)),
 		 * subtracao(variavel("b",constante(2)))

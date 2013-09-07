@@ -31,27 +31,27 @@ public class Language {
 	}
 
 	public <T> void assign(VarExpression<T> _left, I_Expression<T> _right) {
-		m_block.add(getassign(_left, _right));
+		m_block.add(getAssignement(_left, _right));
 	}
 
 	public <T> void assign(String _left, String _right) {
-		m_block.add(getassign(_left, _right));
+		m_block.add(getAssignement(_left, _right));
 	}
 
 	public <T> void assign(String _left, I_Expression<T> _right) {
-		m_block.add(getassign(_left, _right));
+		m_block.add(getAssignement(_left, _right));
 	}
 
-	public <T> AssignmentStatement<T> getassign(VarExpression<T> _left,
+	public <T> AssignmentStatement<T> getAssignement(VarExpression<T> _left,
 			I_Expression<T> _right) {
 		return new AssignmentStatement<T>(_left, _right);
 	}
 
-	public <T> AssignmentStatement<T> getassign(String _left, String _right) {
+	public <T> AssignmentStatement<T> getAssignement(String _left, String _right) {
 		return new AssignmentStatement<T>(m_vars.get(_left), m_vars.get(_right));
 	}
 
-	public <T> AssignmentStatement<T> getassign(String _left,
+	public <T> AssignmentStatement<T> getAssignement(String _left,
 			I_Expression<T> _right) {
 		return new AssignmentStatement<T>(m_vars.get(_left), _right);
 	}
