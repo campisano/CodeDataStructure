@@ -1,190 +1,84 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
+import simple_model.Program;
+import simple_model.expression.Add;
+import simple_model.expression.Const;
+import simple_model.expression.Expression;
+import simple_model.expression.LessThen;
+import simple_model.expression.Value;
+import simple_model.statement.Attrib;
+import simple_model.statement.IntVar;
+import simple_model.statement.Print;
+import simple_model.statement.Statement;
+import simple_model.statement.While;
 
 public class SimpleLoopTest {
 
-	public interface STATEMENT {
-		public void execute();
+	public static Program PROGRAM(Statement... statements) {
+		return new Program(statements);
 	}
 
-	public interface EXPRESSION {
-		public String evaluate();
+	public static IntVar INTVAR(String varName) {
+		return new IntVar(varName);
 	}
 
-	public abstract class UNARYEXPRESSION implements EXPRESSION {
-		protected EXPRESSION e;
-
-		public UNARYEXPRESSION(String e) {
-			this.e = new VALUE(e);
-		}
-
-		public UNARYEXPRESSION(EXPRESSION e) {
-			this.e = e;
-		}
+	public static While WHILE(Expression condition, Statement... statements) {
+		return new While(condition, statements);
 	}
 
-	public abstract class BINARYEXPRESSION implements EXPRESSION {
-		protected EXPRESSION e1;
-		protected EXPRESSION e2;
-
-		public BINARYEXPRESSION(String e1, String e2) {
-			this.e1 = new VALUE(e1);
-			this.e2 = new VALUE(e2);
-		}
-
-		public BINARYEXPRESSION(EXPRESSION e1, EXPRESSION e2) {
-			this.e1 = e1;
-			this.e2 = e2;
-		}
+	public static Print PRINT(Expression expression) {
+		return new Print(expression);
 	}
 
-	public class PROGRAM {
-		public PROGRAM(STATEMENT... statements) {
-			for (STATEMENT statement : statements) {
-				statement.execute();
-			}
-		}
+	public static Value VALUE(String varName) {
+		return new Value(varName);
 	}
 
-	public class INTVAR implements STATEMENT {
-		private String name;
-
-		public INTVAR(String name) {
-			this.name = name;
-		}
-
-		public void execute() {
-			System.out.println("int " + name + ";");
-		}
+	public static Const CONST(int value) {
+		return new Const(value);
 	}
 
-	public class WHILE implements STATEMENT {
-		private EXPRESSION condition;
-		private List<STATEMENT> statements;
-
-		public WHILE(EXPRESSION condition, STATEMENT... statements) {
-			this.condition = condition;
-			this.statements = new ArrayList<STATEMENT>();
-
-			for (STATEMENT s : statements) {
-				this.statements.add(s);
-			}
-		}
-
-		public void execute() {
-			System.out.println("while (" + condition.evaluate() + ") {");
-
-			for (STATEMENT s : statements) {
-				System.out.print("    ");
-				s.execute();
-			}
-
-			System.out.println("}");
-		}
+	public static Attrib ATTRIB(Value varName, Expression expression) {
+		return new Attrib(varName, expression);
 	}
 
-	public class LT extends BINARYEXPRESSION {
-		public LT(EXPRESSION e1, EXPRESSION e2) {
-			super(e1, e2);
-		}
-
-		public String evaluate() {
-			return e1.evaluate() + "<" + e2.evaluate();
-		}
+	public static Add ADD(Expression e1, Expression e2) {
+		return new Add(e1, e2);
 	}
 
-	public class ADD extends BINARYEXPRESSION {
-		public ADD(EXPRESSION e1, EXPRESSION e2) {
-			super(e1, e2);
-		}
-
-		public String evaluate() {
-			return e1.evaluate() + "+" + e2.evaluate();
-		}
-	}
-
-	public class VALUE implements EXPRESSION {
-		private String varName;
-
-		public VALUE(String varName) {
-			this.varName = varName;
-		}
-
-		public String evaluate() {
-			return varName;
-		}
-	}
-
-	public class ATRIB implements STATEMENT {
-		private VALUE varName;
-		private EXPRESSION expression;
-
-		public ATRIB(VALUE varName, EXPRESSION expression) {
-			this.varName = varName;
-			this.expression = expression;
-		}
-
-		public void execute() {
-			System.out.println(varName.evaluate() + " = "
-					+ expression.evaluate() + ";");
-		}
-	}
-
-	public class PRINT implements STATEMENT {
-
-		private EXPRESSION expression;
-
-		public PRINT(EXPRESSION expression) {
-			this.expression = expression;
-		}
-
-		public void execute() {
-			System.out.println("std::cout << " + expression.evaluate() + ";");
-		}
-	}
-
-	public class CONST extends UNARYEXPRESSION {
-
-		public CONST(int value) {
-			super(String.valueOf(value));
-		}
-
-		public String evaluate() {
-			return e.evaluate();
-		}
+	public static LessThen LT(Expression e1, Expression e2) {
+		return new LessThen(e1, e2);
 	}
 
 	public SimpleLoopTest() {
-		new PROGRAM(
-				new INTVAR("I"),
-				new INTVAR("J"),
-				new WHILE(
-						new LT(
-								new VALUE("I"),
-								new CONST(10)
+		PROGRAM(
+				INTVAR("I"),
+				INTVAR("J"),
+				WHILE(
+						LT(
+								VALUE("I"),
+								CONST(10)
 						),
-						new ATRIB(
-								new VALUE("J"),
-								new ADD(
-										new VALUE("J"),
-										new CONST(10)
+						ATTRIB(
+								VALUE("J"),
+								ADD(
+										VALUE("J"),
+										CONST(10)
 								)
 						),
-						new ATRIB(
-								new VALUE("I"),
-								new ADD(
-										new VALUE("I"),
-										new CONST(1)
+						ATTRIB(
+								VALUE("I"),
+								ADD(
+										VALUE("I"),
+										CONST(1)
 								)
 						)
 				),
-				new PRINT(
-						new VALUE("I")
+				PRINT(
+						VALUE("I")
 				),
-				new PRINT(
-						new VALUE("J")
+				PRINT(
+						VALUE("J")
 				)
 		);
 	}
@@ -192,7 +86,7 @@ public class SimpleLoopTest {
 	public static void main(String[] args) {
 
 		new SimpleLoopTest();
-		
+
 		// ouptut
 		// int I;
 		// int J;
