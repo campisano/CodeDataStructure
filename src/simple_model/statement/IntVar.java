@@ -1,6 +1,9 @@
 package simple_model.statement;
 
-public class IntVar implements Statement {
+import simple_model.VisitableNode;
+import visitor.IntVarVisitor;
+
+public class IntVar extends VisitableNode implements Statement {
 	private String name;
 
 	public IntVar(String name) {
@@ -8,6 +11,6 @@ public class IntVar implements Statement {
 	}
 
 	public void execute() {
-		System.out.println("int " + name + ";");
+		((IntVarVisitor) visitor).execute(name);
 	}
 }

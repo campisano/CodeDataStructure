@@ -3,9 +3,11 @@ package simple_model.statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import simple_model.VisitableNode;
 import simple_model.expression.Expression;
+import visitor.WhileVisitor;
 
-public class While implements Statement {
+public class While extends VisitableNode implements Statement {
 	private Expression condition;
 	private List<Statement> statements;
 
@@ -19,13 +21,6 @@ public class While implements Statement {
 	}
 
 	public void execute() {
-		System.out.println("while (" + condition.evaluate() + ") {");
-
-		for (Statement s : statements) {
-			System.out.print("    ");
-			s.execute();
-		}
-
-		System.out.println("}");
+		((WhileVisitor) visitor).execute(condition, statements);
 	}
 }

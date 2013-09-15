@@ -1,8 +1,10 @@
 package simple_model.statement;
 
+import simple_model.VisitableNode;
 import simple_model.expression.Expression;
+import visitor.PrintVisitor;
 
-public class Print implements Statement {
+public class Print extends VisitableNode implements Statement {
 
 	private Expression expression;
 
@@ -11,6 +13,6 @@ public class Print implements Statement {
 	}
 
 	public void execute() {
-		System.out.println("std::cout << " + expression.evaluate() + ";");
+		((PrintVisitor) visitor).execute(expression);
 	}
 }

@@ -1,56 +1,15 @@
 package test;
 
-import simple_model.Program;
-import simple_model.expression.Add;
-import simple_model.expression.Const;
-import simple_model.expression.Expression;
-import simple_model.expression.LessThen;
-import simple_model.expression.Value;
-import simple_model.statement.Attrib;
-import simple_model.statement.IntVar;
-import simple_model.statement.Print;
-import simple_model.statement.Statement;
-import simple_model.statement.While;
+import java_visitor.JavaGeneratorCodeDataStructureVisitorFactory;
+import cpp_visitor.CppGeneratorCodeDataStructureVisitorFactory;
+import simple_model.CodeDataStructureVisitorFactory;
+import simple_model.FactoryCodeDataStructure;
 
-public class SimpleLoopTest {
+public class SimpleLoopTest extends FactoryCodeDataStructure {
 
-	public static Program PROGRAM(Statement... statements) {
-		return new Program(statements);
-	}
-
-	public static IntVar INTVAR(String varName) {
-		return new IntVar(varName);
-	}
-
-	public static While WHILE(Expression condition, Statement... statements) {
-		return new While(condition, statements);
-	}
-
-	public static Print PRINT(Expression expression) {
-		return new Print(expression);
-	}
-
-	public static Value VALUE(String varName) {
-		return new Value(varName);
-	}
-
-	public static Const CONST(int value) {
-		return new Const(value);
-	}
-
-	public static Attrib ATTRIB(Value varName, Expression expression) {
-		return new Attrib(varName, expression);
-	}
-
-	public static Add ADD(Expression e1, Expression e2) {
-		return new Add(e1, e2);
-	}
-
-	public static LessThen LT(Expression e1, Expression e2) {
-		return new LessThen(e1, e2);
-	}
-
-	public SimpleLoopTest() {
+	public SimpleLoopTest(CodeDataStructureVisitorFactory visitor) {
+		super(visitor);
+		
 		PROGRAM(
 				INTVAR("I"),
 				INTVAR("J"),
@@ -84,10 +43,13 @@ public class SimpleLoopTest {
 	}
 
 	public static void main(String[] args) {
-
-		new SimpleLoopTest();
-
-		// ouptut
+		System.out.println("--------------------");
+		new SimpleLoopTest(new CppGeneratorCodeDataStructureVisitorFactory());
+		System.out.println("--------------------");
+		new SimpleLoopTest(new JavaGeneratorCodeDataStructureVisitorFactory());
+		System.out.println("--------------------");
+		// ouptut :
+		// --------------------
 		// int I;
 		// int J;
 		// while (I<10) {
@@ -96,5 +58,15 @@ public class SimpleLoopTest {
 		// }
 		// std::cout << I;
 		// std::cout << J;
+		// --------------------
+		// int I;
+		// int J;
+		// while (I<10) {
+		//     J = J+10;
+		//     I = I+1;
+		// }
+		// System.out.print(I);
+		// System.out.print(J);
+		// --------------------
 	}
 }

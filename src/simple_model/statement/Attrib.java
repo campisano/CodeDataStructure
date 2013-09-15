@@ -1,9 +1,11 @@
 package simple_model.statement;
 
+import simple_model.VisitableNode;
 import simple_model.expression.Expression;
 import simple_model.expression.Value;
+import visitor.AttribVisitor;
 
-public class Attrib implements Statement {
+public class Attrib extends VisitableNode implements Statement {
 	private Value varName;
 	private Expression expression;
 
@@ -13,7 +15,6 @@ public class Attrib implements Statement {
 	}
 
 	public void execute() {
-		System.out.println(varName.evaluate() + " = " + expression.evaluate()
-				+ ";");
+		((AttribVisitor) visitor).execute(varName, expression);
 	}
 }
