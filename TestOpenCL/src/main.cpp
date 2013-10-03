@@ -9,9 +9,9 @@
 //dependem de vector_add_kernel.cl
 #define INPUT_PARAMETERS 2
 #define OUTPUT_PARAMETERS 2
-#define DATA_TYPE long
 
 //utility i/o classes
+typedef long DATA_TYPE;
 typedef Table<DATA_TYPE> Input;
 typedef Table<DATA_TYPE> Output;
 
