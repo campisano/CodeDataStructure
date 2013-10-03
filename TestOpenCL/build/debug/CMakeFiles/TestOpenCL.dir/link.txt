@@ -1,0 +1,1 @@
+/usr/bin/g++   -g   CMakeFiles/TestOpenCL.dir/src/main.cpp.o  -o TestOpenCL -rdynamic -lOpenCL 
