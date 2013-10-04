@@ -6,28 +6,43 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 
-#define N 10000 // Matrix dim = N x N
 #define THREADSperBLOCK 1024
 
-// Kernel: usando mais de um bloco (uso típico)
-__global__ void vecAdd(const float *A, const float *B, float *C)
+__global__ void vecMult(const float *A, const float *B, float *C, unsigned int width)
 {
-	unsigned x = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned y = blockIdx.y * blockDim.y + threadIdx.y;
-
+	//unsigned x = blockIdx.x * blockDim.x + threadIdx.x;
+	//unsigned y = blockIdx.y * blockDim.y + threadIdx.y;
+	/*
 	int i = N * y + x;
 
 	if(i < N * N)
 	{
 		C[i] = A[i] + B[i];
 	}
+	*/
+
+	// Kernel: usando SOMENTE UM BLOCO que possui 1024 threads
+	unsigned int tx = threadIdx.x;
+	unsigned int ty = threadIdx.y;
+
+	float sum = 0, a, b;
+	
+	for (int k = 0; k < width; ++k)
+	{
+		a = A[ty * width + k]; // a = h_A[y * width + k];
+		b = B[k * width + tx]; // b = h_B[k * width + x];
+		sum += a*b;
+	}
+
+	C[ty * width + tx] = sum; //h_Cref[y * width + x] = sum;
 }
 
 int main(int argc, char** argv)
 {
 	// vars
-	unsigned int VECTOR_SIZE = N * N;
-	unsigned int size = VECTOR_SIZE * sizeof(float);
+	unsigned int width = 32;
+	unsigned long VECTOR_SIZE = width * width;
+	unsigned long size = VECTOR_SIZE * sizeof(float);
 	float *h_A, *h_B, *h_C, *h_Cref;
 	float *d_A, *d_B, *d_C;
 	
@@ -55,10 +70,22 @@ int main(int argc, char** argv)
 	// Compute CPU
 	{
 		startTime = clock();
-
-		for (int i = 0; i < (VECTOR_SIZE); ++i)
+		float sum, a, b;
+		for (int y = 0; y < width; ++y)
 		{
-			h_Cref[i] = h_A[i] + h_B[i];
+			for (int x = 0; x < width; ++x)
+			{
+				sum = 0;
+
+				for (int k = 0; k < width; ++k)
+				{
+					a = h_A[y * width + k];
+					b = h_B[k * width + x];
+					sum += a*b;
+				}
+
+				h_Cref[y * width + x] = sum;
+			}
 		}
 
 		elapsedTimeCPU = (clock() - startTime) / CLOCKS_PER_SEC;
@@ -80,8 +107,10 @@ int main(int argc, char** argv)
 
 	// Compute GPU
 	{
+		dim3 dimBlock(width, width);
+		dim3 dimGrid(1, 1);
 		startTime = clock();
-		vecAdd<<< (VECTOR_SIZE+THREADSperBLOCK-1)/THREADSperBLOCK, THREADSperBLOCK >>>(d_A, d_B, d_C);
+		vecMult<<<dimGrid, dimBlock>>>(d_A, d_B, d_C, width);
 		cudaThreadSynchronize(); // Aguarda fim da execução do kernel pela GPU
 		elapsedTimeGPU = (clock() - startTime) / CLOCKS_PER_SEC;
 		printf("GPU = %f s\n", elapsedTimeGPU);
