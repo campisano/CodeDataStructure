@@ -3,6 +3,7 @@ package java_visitor;
 import model.CodeDataStructureVisitorFactory;
 import visitor.ArrayIntVisitor;
 import visitor.AttribVisitor;
+import visitor.DeclareScopeVisitor;
 import visitor.DoTimesVisitor;
 import visitor.IntVarVisitor;
 import visitor.PrintVisitor;
@@ -14,6 +15,10 @@ public class JavaGeneratorCodeDataStructureVisitorFactory implements
 
 	public DefineScopeVisitor getDefineScope() {
 		return new JavaDefineScopeVisitor();
+	}
+
+	public DeclareScopeVisitor getDeclareScope() {
+		return new JavaDeclareScopeVisitor();
 	}
 
 	public IntVarVisitor getIntVar() {

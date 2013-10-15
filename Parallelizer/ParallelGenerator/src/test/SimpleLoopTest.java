@@ -16,7 +16,9 @@ public class SimpleLoopTest extends FactoryCodeDataStructure {
 							ARRAYINT("result", 10),
 							ARRAYINT("left", 10),
 							ARRAYINT("right", 10)
-						)
+						),
+
+						INTVAR("times")
 				),
 				INTVAR("I"),
 				INTVAR("J"),
@@ -46,14 +48,15 @@ public class SimpleLoopTest extends FactoryCodeDataStructure {
 				PRINT(
 						VALUE("J")
 				),
+				DECLARESCOPE("Scope", "scope"),
 				DOTIMES(
-						VALUE("result"),	//TODO [CMP] ou SCOPE("scope") aqui?
+						VALUE("scope"),
 //						BLOCK(),
 						ATTRIB(
-							ARRAYITEM("result", "time"),
+							ARRAYITEM("scope.result", "time"),
 							ADD(
-								ARRAYITEM("left", "time"),
-								ARRAYITEM("right", "time"))
+								ARRAYITEM("scope.left", "time"),
+								ARRAYITEM("scope.right", "time"))
 						),
 						CONST(10))
 		);

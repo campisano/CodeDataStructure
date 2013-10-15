@@ -3,6 +3,7 @@ package cpp_visitor;
 import model.CodeDataStructureVisitorFactory;
 import visitor.ArrayIntVisitor;
 import visitor.AttribVisitor;
+import visitor.DeclareScopeVisitor;
 import visitor.DoTimesVisitor;
 import visitor.IntVarVisitor;
 import visitor.PrintVisitor;
@@ -15,7 +16,11 @@ public class CppGeneratorCodeDataStructureVisitorFactory implements
 	public DefineScopeVisitor getDefineScope() {
 		return new CppDefineScopeVisitor();
 	}
-	
+
+	public DeclareScopeVisitor getDeclareScope() {
+		return new CppDeclareScopeVisitor();
+	}
+
 	public IntVarVisitor getIntVar() {
 		return new CppIntVarVisitor();
 	}

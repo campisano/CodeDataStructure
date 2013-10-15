@@ -8,6 +8,7 @@ import model.expression.LessThen;
 import model.expression.Value;
 import model.statement.ArrayInt;
 import model.statement.Attrib;
+import model.statement.DeclareScope;
 import model.statement.DoTimes;
 import model.statement.IntVar;
 import model.statement.Print;
@@ -35,6 +36,20 @@ public class FactoryCodeDataStructure {
 		return new Definition(statements);
 	}
 
+	public DefineScope DEFINESCOPE(String scopeName, Statement... statements) {
+		DefineScope defineScope = new DefineScope(scopeName, statements);
+		defineScope.assign(visitor.getDefineScope());
+
+		return defineScope;
+	}
+
+	public DeclareScope DECLARESCOPE(String scopeName, String valueName) {
+		DeclareScope declareScope = new DeclareScope(scopeName, valueName);
+		declareScope.assign(visitor.getDeclareScope());
+
+		return declareScope;
+	}
+
 	public IntVar INTVAR(String varName) {
 		IntVar intVar = new IntVar(varName);
 		intVar.assign(visitor.getIntVar());
@@ -47,13 +62,6 @@ public class FactoryCodeDataStructure {
 		arrayInt.assign(visitor.getArrayInt());
 
 		return arrayInt;
-	}
-
-	public DefineScope DEFINESCOPE(String scopeName, Statement... statements) {
-		DefineScope defineScope = new DefineScope(scopeName, statements);
-		defineScope.assign(visitor.getDefineScope());
-
-		return defineScope;
 	}
 
 	public While WHILE(Expression condition, Statement... statements) {
