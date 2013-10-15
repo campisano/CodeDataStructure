@@ -8,4 +8,12 @@ public class Program {
 			statement.execute();
 		}
 	}
+
+	public Program(Definition definition, Statement... statements) {
+		definition.execute();
+
+		for (Statement statement : statements) {
+			statement.execute();
+		}
+	}
 }

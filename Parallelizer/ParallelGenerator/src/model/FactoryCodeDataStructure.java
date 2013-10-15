@@ -11,6 +11,7 @@ import model.statement.Attrib;
 import model.statement.DoTimes;
 import model.statement.IntVar;
 import model.statement.Print;
+import model.statement.DefineScope;
 import model.statement.Statement;
 import model.statement.While;
 
@@ -26,39 +27,47 @@ public class FactoryCodeDataStructure {
 		return new Program(statements);
 	}
 
-	public IntVar INTVAR(String varName) {
-		IntVar int_var = new IntVar(varName);
-		int_var.assign(visitor.getIntVar());
+	public Program PROGRAM(Definition definition, Statement... statements) {
+		return new Program(definition, statements);
+	}
 
-		return int_var;
+	public Definition DEFINITION(Statement... statements) {
+		return new Definition(statements);
+	}
+
+	public IntVar INTVAR(String varName) {
+		IntVar intVar = new IntVar(varName);
+		intVar.assign(visitor.getIntVar());
+
+		return intVar;
 	}
 
 	public ArrayInt ARRAYINT(String arrName, int size) {
-		ArrayInt array_int = new ArrayInt(arrName, size);
-		array_int.assign(visitor.getArrayInt());
+		ArrayInt arrayInt = new ArrayInt(arrName, size);
+		arrayInt.assign(visitor.getArrayInt());
 
-		return array_int;
+		return arrayInt;
+	}
+
+	public DefineScope DEFINESCOPE(String scopeName, Statement... statements) {
+		DefineScope defineScope = new DefineScope(scopeName, statements);
+		defineScope.assign(visitor.getDefineScope());
+
+		return defineScope;
 	}
 
 	public While WHILE(Expression condition, Statement... statements) {
-		While our_while = new While(condition, statements);
-		our_while.assign(visitor.getWhile());
+		While ourWhile = new While(condition, statements);
+		ourWhile.assign(visitor.getWhile());
 
-		return our_while;
+		return ourWhile;
 	}
 
-	public DoTimes DOTIMES(Scope scope, Statement statement, Expression times) {
-		DoTimes do_times = new DoTimes(scope, statement, times);
-		do_times.assign(visitor.getDoTimes());
+	public DoTimes DOTIMES(Value scope, Statement statement, Expression times) {
+		DoTimes doTimes = new DoTimes(scope, statement, times);
+		doTimes.assign(visitor.getDoTimes());
 
-		return do_times;
-	}
-
-	public Scope SCOPE(Expression... expressions) {
-		Scope scope = new Scope(expressions);
-		// scope.assign(visitor.getScope());
-
-		return scope;
+		return doTimes;
 	}
 
 	public Print PRINT(Expression expression) {
@@ -75,20 +84,21 @@ public class FactoryCodeDataStructure {
 		return value;
 	}
 
-	//TODO [CMP] é um statement ou uma expression? por enquanto uma expression...
+	// TODO [CMP] é um statement ou uma expression? por enquanto uma
+	// expression...
 	public ArrayItem ARRAYITEM(/* TODO ArrayInt ? */String arrName,
 	/* TODO Value ? */String itemName) {
 		ArrayItem arrItem = new ArrayItem(arrName, itemName);
-		//arrItem.assign(visitor.getArrayItem());
+		// arrItem.assign(visitor.getArrayItem());
 
 		return arrItem;
 	}
 
 	public Const CONST(int value) {
-		Const our_const = new Const(value);
-		// our_const.assign(visitor.getConst());
+		Const ourConst = new Const(value);
+		// ourConst.assign(visitor.getConst());
 
-		return our_const;
+		return ourConst;
 	}
 
 	public Attrib ATTRIB(Value varName, Expression expression) {

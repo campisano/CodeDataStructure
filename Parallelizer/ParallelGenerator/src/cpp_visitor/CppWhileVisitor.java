@@ -8,7 +8,8 @@ import visitor.WhileVisitor;
 
 public class CppWhileVisitor implements WhileVisitor {
 	public void execute(Expression condition, List<Statement> statements) {
-		System.out.println("while (" + condition.evaluate() + ") {");
+		System.out.println("while (" + condition.evaluate() + ")");
+		System.out.println("{");
 
 		for (Statement s : statements) {
 			System.out.print("    ");

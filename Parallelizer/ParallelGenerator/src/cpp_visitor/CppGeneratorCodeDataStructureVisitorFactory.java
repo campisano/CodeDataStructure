@@ -6,11 +6,16 @@ import visitor.AttribVisitor;
 import visitor.DoTimesVisitor;
 import visitor.IntVarVisitor;
 import visitor.PrintVisitor;
+import visitor.DefineScopeVisitor;
 import visitor.WhileVisitor;
 
 public class CppGeneratorCodeDataStructureVisitorFactory implements
 		CodeDataStructureVisitorFactory {
 
+	public DefineScopeVisitor getDefineScope() {
+		return new CppDefineScopeVisitor();
+	}
+	
 	public IntVarVisitor getIntVar() {
 		return new CppIntVarVisitor();
 	}

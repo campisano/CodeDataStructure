@@ -6,10 +6,15 @@ import visitor.AttribVisitor;
 import visitor.DoTimesVisitor;
 import visitor.IntVarVisitor;
 import visitor.PrintVisitor;
+import visitor.DefineScopeVisitor;
 import visitor.WhileVisitor;
 
 public class JavaGeneratorCodeDataStructureVisitorFactory implements
 		CodeDataStructureVisitorFactory {
+
+	public DefineScopeVisitor getDefineScope() {
+		return new JavaDefineScopeVisitor();
+	}
 
 	public IntVarVisitor getIntVar() {
 		return new JavaIntVarVisitor();
