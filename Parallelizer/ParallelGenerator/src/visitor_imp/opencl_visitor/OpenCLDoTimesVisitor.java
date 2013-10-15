@@ -1,4 +1,4 @@
-package cpp_visitor;
+package visitor_imp.opencl_visitor;
 
 //import java.util.List;
 
@@ -7,7 +7,7 @@ import model.expression.Value;
 import model.statement.Statement;
 import visitor.DoTimesVisitor;
 
-public class CppDoTimesVisitor implements DoTimesVisitor {
+public class OpenCLDoTimesVisitor implements DoTimesVisitor {
 	public void execute(Value scope, Statement statement, Expression times) {
 		System.out.println("for (int time = 0; time < " + times.evaluate()
 				+ "; ++time) {");

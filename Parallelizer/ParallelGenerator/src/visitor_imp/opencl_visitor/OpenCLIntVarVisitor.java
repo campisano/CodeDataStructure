@@ -1,8 +1,8 @@
-package cpp_visitor;
+package visitor_imp.opencl_visitor;
 
 import visitor.IntVarVisitor;
 
-public class CppIntVarVisitor implements IntVarVisitor {
+public class OpenCLIntVarVisitor implements IntVarVisitor {
 	public void execute(String name, Integer value, boolean constant) {
 		if (constant) {
 			System.out.print("const ");

@@ -1,4 +1,4 @@
-package cpp_visitor;
+package visitor_imp.java_visitor;
 
 import java.util.List;
 
@@ -6,10 +6,9 @@ import model.expression.Expression;
 import model.statement.Statement;
 import visitor.WhileVisitor;
 
-public class CppWhileVisitor implements WhileVisitor {
+public class JavaWhileVisitor implements WhileVisitor {
 	public void execute(Expression condition, List<Statement> statements) {
-		System.out.println("while (" + condition.evaluate() + ")");
-		System.out.println("{");
+		System.out.println("while (" + condition.evaluate() + ") {");
 
 		for (Statement s : statements) {
 			System.out.print("    ");

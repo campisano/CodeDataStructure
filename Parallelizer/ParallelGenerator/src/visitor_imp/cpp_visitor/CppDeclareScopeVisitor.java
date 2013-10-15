@@ -1,4 +1,4 @@
-package cpp_visitor;
+package visitor_imp.cpp_visitor;
 
 import visitor.DeclareScopeVisitor;
 

@@ -1,4 +1,4 @@
-package cpp_visitor;
+package visitor_imp.opencl_visitor;
 
 import model.CodeDataStructureVisitorFactory;
 import visitor.ArrayIntVisitor;
@@ -10,38 +10,38 @@ import visitor.PrintVisitor;
 import visitor.DefineScopeVisitor;
 import visitor.WhileVisitor;
 
-public class CppGeneratorCodeDataStructureVisitorFactory implements
+public class OpenCLGeneratorCodeDataStructureVisitorFactory implements
 		CodeDataStructureVisitorFactory {
 
 	public DefineScopeVisitor getDefineScope() {
-		return new CppDefineScopeVisitor();
+		return new OpenCLDefineScopeVisitor();
 	}
 
 	public DeclareScopeVisitor getDeclareScope() {
-		return new CppDeclareScopeVisitor();
+		return new OpenCLDeclareScopeVisitor();
 	}
 
 	public IntVarVisitor getIntVar() {
-		return new CppIntVarVisitor();
+		return new OpenCLIntVarVisitor();
 	}
 
 	public ArrayIntVisitor getArrayInt() {
-		return new CppArrayIntVisitor();
+		return new OpenCLArrayIntVisitor();
 	}
 
 	public WhileVisitor getWhile() {
-		return new CppWhileVisitor();
+		return new OpenCLWhileVisitor();
 	}
 
 	public DoTimesVisitor getDoTimes() {
-		return new CppDoTimesVisitor();
+		return new OpenCLDoTimesVisitor();
 	}
 
 	public PrintVisitor getPrint() {
-		return new CppPrintVisitor();
+		return new OpenCLPrintVisitor();
 	}
 
 	public AttribVisitor getAttrib() {
-		return new CppAttribVisitor();
+		return new OpenCLAttribVisitor();
 	}
 }

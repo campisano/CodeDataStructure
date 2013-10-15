@@ -1,9 +1,10 @@
 package test;
 
-import java_visitor.JavaGeneratorCodeDataStructureVisitorFactory;
+import visitor_imp.cpp_visitor.CppGeneratorCodeDataStructureVisitorFactory;
+import visitor_imp.java_visitor.JavaGeneratorCodeDataStructureVisitorFactory;
+import visitor_imp.opencl_visitor.OpenCLGeneratorCodeDataStructureVisitorFactory;
 import model.CodeDataStructureVisitorFactory;
 import model.FactoryCodeDataStructure;
-import cpp_visitor.CppGeneratorCodeDataStructureVisitorFactory;
 
 public class TestDoTimes extends FactoryCodeDataStructure {
 	public TestDoTimes(CodeDataStructureVisitorFactory visitor) {
@@ -36,6 +37,8 @@ public class TestDoTimes extends FactoryCodeDataStructure {
 		new TestDoTimes(new CppGeneratorCodeDataStructureVisitorFactory());
 		System.out.println("--------------------");
 		new TestDoTimes(new JavaGeneratorCodeDataStructureVisitorFactory());
+		System.out.println("--------------------");
+		new TestDoTimes(new OpenCLGeneratorCodeDataStructureVisitorFactory());
 		System.out.println("--------------------");
 	}
 }

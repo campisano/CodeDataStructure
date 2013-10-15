@@ -1,9 +1,9 @@
 package test;
 
+import visitor_imp.cpp_visitor.CppGeneratorCodeDataStructureVisitorFactory;
+import visitor_imp.java_visitor.JavaGeneratorCodeDataStructureVisitorFactory;
 import model.CodeDataStructureVisitorFactory;
 import model.FactoryCodeDataStructure;
-import java_visitor.JavaGeneratorCodeDataStructureVisitorFactory;
-import cpp_visitor.CppGeneratorCodeDataStructureVisitorFactory;
 
 public class SimpleLoopTest extends FactoryCodeDataStructure {
 
