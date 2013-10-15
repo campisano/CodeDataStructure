@@ -1,7 +1,9 @@
 package visitor;
 
+import model.expression.Value;
+
 public interface ArrayIntVisitor extends NodeVisitor {
 
-	void execute(String name, int size);
+	void execute(String name, Value size);
 
 }

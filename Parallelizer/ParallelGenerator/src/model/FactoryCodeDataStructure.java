@@ -36,28 +36,42 @@ public class FactoryCodeDataStructure {
 		return new Definition(statements);
 	}
 
-	public DefineScope DEFINESCOPE(String scopeName, Statement... statements) {
+	public DefineScope DEFINE_SCOPE(String scopeName, Statement... statements) {
 		DefineScope defineScope = new DefineScope(scopeName, statements);
 		defineScope.assign(visitor.getDefineScope());
 
 		return defineScope;
 	}
 
-	public DeclareScope DECLARESCOPE(String scopeName, String valueName) {
+	public DeclareScope DECLARE_SCOPE(String scopeName, String valueName) {
 		DeclareScope declareScope = new DeclareScope(scopeName, valueName);
 		declareScope.assign(visitor.getDeclareScope());
 
 		return declareScope;
 	}
 
-	public IntVar INTVAR(String varName) {
+	public IntVar DECLARE_CONST(String varName, int value) {
+		IntVar intVar = new IntVar(varName, value, true);
+		intVar.assign(visitor.getIntVar());
+
+		return intVar;
+	}
+
+	public IntVar VAR_INT(String varName) {
 		IntVar intVar = new IntVar(varName);
 		intVar.assign(visitor.getIntVar());
 
 		return intVar;
 	}
 
-	public ArrayInt ARRAYINT(String arrName, int size) {
+	public IntVar VAR_INT(String varName, int value) {
+		IntVar intVar = new IntVar(varName, value);
+		intVar.assign(visitor.getIntVar());
+
+		return intVar;
+	}
+
+	public ArrayInt ARRAY_INT(String arrName, Value size) {
 		ArrayInt arrayInt = new ArrayInt(arrName, size);
 		arrayInt.assign(visitor.getArrayInt());
 
@@ -71,7 +85,7 @@ public class FactoryCodeDataStructure {
 		return ourWhile;
 	}
 
-	public DoTimes DOTIMES(Value scope, Statement statement, Expression times) {
+	public DoTimes DO_TIMES(Value scope, Statement statement, Expression times) {
 		DoTimes doTimes = new DoTimes(scope, statement, times);
 		doTimes.assign(visitor.getDoTimes());
 
@@ -94,7 +108,7 @@ public class FactoryCodeDataStructure {
 
 	// TODO [CMP] é um statement ou uma expression? por enquanto uma
 	// expression...
-	public ArrayItem ARRAYITEM(/* TODO ArrayInt ? */String arrName,
+	public ArrayItem ARRAY_ITEM(/* TODO ArrayInt ? */String arrName,
 	/* TODO Value ? */String itemName) {
 		ArrayItem arrItem = new ArrayItem(arrName, itemName);
 		// arrItem.assign(visitor.getArrayItem());

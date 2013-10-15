@@ -11,17 +11,8 @@ public class SimpleLoopTest extends FactoryCodeDataStructure {
 		super(visitor);
 		
 		PROGRAM(
-				DEFINITION(
-					DEFINESCOPE("Scope",
-							ARRAYINT("result", 10),
-							ARRAYINT("left", 10),
-							ARRAYINT("right", 10)
-						),
-
-						INTVAR("times")
-				),
-				INTVAR("I"),
-				INTVAR("J"),
+				VAR_INT("I"),
+				VAR_INT("J"),
 				WHILE(
 						LT(
 								VALUE("I"),
@@ -47,18 +38,7 @@ public class SimpleLoopTest extends FactoryCodeDataStructure {
 				),
 				PRINT(
 						VALUE("J")
-				),
-				DECLARESCOPE("Scope", "scope"),
-				DOTIMES(
-						VALUE("scope"),
-//						BLOCK(),
-						ATTRIB(
-							ARRAYITEM("scope.result", "time"),
-							ADD(
-								ARRAYITEM("scope.left", "time"),
-								ARRAYITEM("scope.right", "time"))
-						),
-						CONST(10))
+				)
 		);
 	}
 
@@ -69,24 +49,27 @@ public class SimpleLoopTest extends FactoryCodeDataStructure {
 		new SimpleLoopTest(new JavaGeneratorCodeDataStructureVisitorFactory());
 		System.out.println("--------------------");
 		// ouptut :
-		// --------------------
-		// int I;
-		// int J;
-		// while (I<10) {
-		//     J = J+10;
-		//     I = I+1;
-		// }
-		// std::cout << I;
-		// std::cout << J;
-		// --------------------
-		// int I;
-		// int J;
-		// while (I<10) {
-		//     J = J+10;
-		//     I = I+1;
-		// }
-		// System.out.print(I);
-		// System.out.print(J);
-		// --------------------
+		/*
+		--------------------
+		int I;
+		int J;
+		while (I<10)
+		{
+		    J = J+10;
+		    I = I+1;
+		}
+		std::cout << I;
+		std::cout << J;
+		--------------------
+		int I;
+		int J;
+		while (I<10) {
+		    J = J+10;
+		    I = I+1;
+		}
+		System.out.print(I);
+		System.out.print(J);
+		--------------------
+		 */
 	}
 }
