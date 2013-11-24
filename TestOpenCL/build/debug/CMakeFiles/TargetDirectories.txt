@@ -1,1 +1,0 @@
-/home/shared/develop/projects/Testing/TestOpenCL/build/debug/CMakeFiles/TestOpenCL.dir
