@@ -1,6 +1,6 @@
 package model.expressions;
 
-import model.I_Expression;
+import model.common.Scope;
 
 public class LongAddExpression extends A_BinaryExpression<Long, Long> {
 	public LongAddExpression(I_Expression<Long> _first,
@@ -8,7 +8,7 @@ public class LongAddExpression extends A_BinaryExpression<Long, Long> {
 		super(_first, _second);
 	}
 
-	public Long evaluate() {
-		return m_first.evaluate() + m_second.evaluate();
+	public Long evaluate(Scope _scope) throws Exception {
+		return m_first.evaluate(_scope) + m_second.evaluate(_scope);
 	}
 }

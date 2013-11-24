@@ -1,6 +1,6 @@
 package model.expressions;
 
-import model.I_Expression;
+import model.common.Scope;
 
 public class IntegerAddExpression extends A_BinaryExpression<Integer, Integer> {
 	public IntegerAddExpression(I_Expression<Integer> _first,
@@ -8,7 +8,7 @@ public class IntegerAddExpression extends A_BinaryExpression<Integer, Integer> {
 		super(_first, _second);
 	}
 
-	public Integer evaluate() {
-		return m_first.evaluate() + m_second.evaluate();
+	public Integer evaluate(Scope _scope) throws Exception {
+		return m_first.evaluate(_scope) + m_second.evaluate(_scope);
 	}
 }

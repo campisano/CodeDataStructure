@@ -1,8 +1,9 @@
 package model.expressions.condition;
 
-import model.I_Expression;
+import model.common.Scope;
 import model.expressions.A_BinaryExpression;
 import model.expressions.I_ConditionalExpression;
+import model.expressions.I_Expression;
 
 public class GreatherThenCondition<T extends Comparable<T>> extends
 		A_BinaryExpression<T, Boolean> implements I_ConditionalExpression {
@@ -11,7 +12,7 @@ public class GreatherThenCondition<T extends Comparable<T>> extends
 		super(_first, _second);
 	}
 
-	public Boolean evaluate() {
-		return m_first.evaluate().compareTo(m_second.evaluate()) > 0;
+	public Boolean evaluate(Scope _scope) throws Exception {
+		return m_first.evaluate(_scope).compareTo(m_second.evaluate(_scope)) > 0;
 	}
 }
