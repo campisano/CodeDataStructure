@@ -1,19 +1,19 @@
 package model.expressions;
 
-import model.I_Expression;
+import model.common.Scope;
 
 public class VarExpression<T> implements I_Expression<T> {
-	protected T m_value;
+	private String m_name;
 
-	public VarExpression() {
-	}
-	
-	//TODO [CMP] verificar um jeito melhor de fazer isso
-	public void internal_assign(T _value) {
-		m_value = _value;
+	public VarExpression(String _name) {
+		m_name = _name;
 	}
 
-	public T evaluate() {
-		return m_value;
+	public T evaluate(Scope _scope) {
+		return _scope.<T> get(m_name);
+	}
+
+	public String getName() {
+		return m_name;
 	}
 }

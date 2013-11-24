@@ -1,7 +1,8 @@
 package model.statements;
 
-import model.I_Expression;
-import model.I_Statement;
+import model.common.Scope;
+
+import model.expressions.I_Expression;
 import model.expressions.VarExpression;
 
 public class AssignmentStatement<T> implements I_Statement {
@@ -13,7 +14,7 @@ public class AssignmentStatement<T> implements I_Statement {
 		m_rvalue = _rvalue;
 	}
 
-	public void execute() {
-		m_lvalue.internal_assign(m_rvalue.evaluate());
+	public void execute(Scope _scope) throws Exception {
+		_scope.assign(m_lvalue.getName(), m_rvalue.evaluate(_scope));
 	}
 }

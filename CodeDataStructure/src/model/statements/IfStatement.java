@@ -1,6 +1,7 @@
 package model.statements;
 
-import model.I_Statement;
+import model.common.Scope;
+
 import model.expressions.I_ConditionalExpression;
 
 public class IfStatement implements I_Statement {
@@ -20,11 +21,11 @@ public class IfStatement implements I_Statement {
 		this(_condition, _statement_true, null);
 	}
 
-	public void execute() {
-		if (m_condition.evaluate()) {
-			m_statement_true.execute();
+	public void execute(Scope _scope) throws Exception {
+		if (m_condition.evaluate(_scope)) {
+			m_statement_true.execute(_scope);
 		} else if (m_statement_false != null) {
-			m_statement_false.execute();
+			m_statement_false.execute(_scope);
 		}
 	}
 }

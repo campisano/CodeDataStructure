@@ -1,6 +1,6 @@
 package model.expressions;
 
-import model.I_Expression;
+import model.common.Scope;
 
 public class ConstExpression<T> implements I_Expression<T> {
 	protected T m_value;
@@ -9,7 +9,7 @@ public class ConstExpression<T> implements I_Expression<T> {
 		m_value = _value;
 	}
 
-	public T evaluate() {
+	public T evaluate(Scope _scope) {
 		return m_value;
 	}
 }
