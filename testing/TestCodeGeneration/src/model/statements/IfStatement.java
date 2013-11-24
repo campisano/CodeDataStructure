@@ -1,7 +1,6 @@
 package model.statements;
 
 import model.common.Scope;
-
 import model.expressions.I_ConditionalExpression;
 
 public class IfStatement implements I_Statement {

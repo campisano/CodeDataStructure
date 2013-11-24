@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import model.common.Scope;
-
 import model.common.Language;
+import model.common.Scope;
 
 public class Block extends Language implements I_Statement {
 	private Scope m_scope;

@@ -1,8 +1,7 @@
 package model.statements;
 
-import model.common.Scope;
-
 import model.common.Language;
+import model.common.Scope;
 import model.expressions.VarExpression;
 import model.statements.I_Statement;
 

@@ -1,7 +1,6 @@
 package model.statements;
 
 import model.common.Scope;
-
 import model.expressions.I_Expression;
 
 public class PrintStatement<T> implements I_Statement {
